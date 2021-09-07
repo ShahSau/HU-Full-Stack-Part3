@@ -8,15 +8,18 @@ let persons = [
     { id: 3,name: 'Dan Abramov', number: '12-43-234345' },
     { id:4, name: 'Mary Poppendieck', number: '39-23-6423122' }
   ]
-app.get('/', (req,res)=>{
-    res.send('<h1> Wlecome </h1>')
-})
 
+//fetching persons
 app.get('/api/persons', (req,res)=>{
     res.json(persons)
 })
 
-
+//fetching info
+app.get('/info', (req,res)=>{
+    res.send(`<div><p>Phonebook has info for ${persons.length} people. </p>
+   <p>${Date()}</p></div>`)
+    
+})
 
 
 
