@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShahSau/HU-Full-Stack-Part3.git"
+  },
+  "author": "shahriar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShahSau/HU-Full-Stack-Part3/issues"
+  },
+  "homepage": "https://github.com/ShahSau/HU-Full-Stack-Part3#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
