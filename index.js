@@ -47,17 +47,27 @@ function integerId(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-app.post('/api/persons',(request,response)=>{
-    const body = request.body
-    console.log(body)
-    const person= {
-        id: integerId(1,1000000000000),
-        name: body.name,
-        number: body.number
-    }
-    persons = persons.concat(person)
-    response.json(person)
-})
+  app.post("/api/persons", (req, res) => {
+    const body = req.body;
+    console.log(body);
+    const name_array = persons.map((person) => person.name);
+    if (!body.name || !body.number) {
+      res.status(400).json({
+        error: "either name or number is missing",
+      });
+    }else if (name_array.includes(body.name)) {
+      res.status(400).json({
+        error: "name must be unique",
+      });
+    }else {const person = {
+      id: integerId(1, 1000000000000),
+      name: body.name,
+      number: body.number,
+    };
+    persons = persons.concat(person);
+    res.json(person);
+  }
+  });
 
 const PORT = 3001;
 
