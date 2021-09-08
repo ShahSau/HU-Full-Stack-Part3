@@ -3,7 +3,8 @@ const morgan = require('morgan');
 
 const app = express();
 app.use(express.json());
-app.use(morgan('tiny'))
+// app.use(morgan('tiny'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'));
 let persons = [
   { id: 1, name: 'Arto Hellas', number: '040-123456' },
   { id: 2, name: 'Ada Lovelace', number: '39-44-5323523' },
@@ -41,6 +42,8 @@ app.delete('/api/persons/:id', (req, res) => {
   persons.filter((p) => p.id !== id);
   res.status(204).end();
 });
+
+
 //creating a person data
 function integerId(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -68,6 +71,11 @@ app.post('/api/persons', (req, res) => {
 }
 });
 
+morgan.token("person", (req, res) => {
+  if (req.method === "POST") {
+    return JSON.stringify(req.body);
+  }
+});
 
 const PORT = 3001;
 
