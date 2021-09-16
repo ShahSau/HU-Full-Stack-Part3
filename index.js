@@ -66,7 +66,7 @@ app.delete("/api/persons/:id",(req,res,next)=>{
 //   return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
   const body = req.body;
   console.log(body);
   if (body.name === undefined || body.number === undefined) {
@@ -120,7 +120,9 @@ const errorHandler = (error, req, res, next) => {
 
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' })
-  } 
+  } else if(error.name === 'ValidationError'){
+    return res.status(400).json({error : error.message})
+  }
 
   next(error)
 }
