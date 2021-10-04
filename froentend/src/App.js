@@ -97,13 +97,23 @@ const App = () => {
     else{ 
     personService
     .create(newObj)
-    .then(newPerson=>
+    .then(newPerson=>{
       setPersons(persons.concat(newPerson))
-      )
+      
       setSuccessMessage(`Added ${newName}`)
           setTimeout(()=>{
             setSuccessMessage(null)
           },5000)
+        })
+        .catch(error=> {
+          let er = `${JSON.stringify(error.response.data.error)}`
+         setErrorMessage(er)
+         console.log(`error message${JSON.stringify(error.response)}`)
+         
+       setTimeout(()=>{
+         setErrorMessage(null)
+       },5000)
+     })
     setNewName("")
     setNewNumber("")
   };
